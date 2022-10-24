@@ -87,7 +87,7 @@ public class SafeInput {
      */
     public static int getRangedInt(Scanner pipe, String prompt, int low, int high)
     {
-        int retVal = 0;
+        int retVal = low - 1;
         String trash = "";
         boolean done = false;
 
@@ -97,8 +97,8 @@ public class SafeInput {
             if (pipe.hasNextInt()) {
                 retVal = pipe.nextInt();
                 pipe.nextLine(); // clear the newline form the buffer
-                if (retVal >= 1 && retVal <= 10) {
-                    System.out.println("\nYou said your ret val is " + retVal);
+                if (retVal >= low && retVal <= high) {
+                    System.out.println("\nYou said your val is " + retVal);
                     done = true;
                 } else {
                     System.out.println("You said your ret val is " + retVal + " but that is out of range [" + low + " - " + high +"]: ");
@@ -123,7 +123,7 @@ public class SafeInput {
      */
     public static double getRangedDouble(Scanner pipe, String prompt, double low, double high)
     {
-        double retVal = 0;
+        double retVal = low - 1;
         String trash = "";
         boolean done = false;
 
@@ -133,7 +133,7 @@ public class SafeInput {
             if (pipe.hasNextDouble()) {
                 retVal = pipe.nextDouble();
                 pipe.nextLine(); // clear the newline form the buffer
-                if (retVal >= 1 && retVal <= 10) {
+                if (retVal >= low && retVal <= high) {
                     System.out.println("\nYou said your ret val is " + retVal);
                     done = true;
                 } else {
@@ -149,9 +149,16 @@ public class SafeInput {
         return retVal;
     }
 
+    /**
+     *
+     * @param pipe The Scanner instance to use for the console input
+     * @param prompt A string that tell the user what to input
+     * @return an integer within the range
+     */
+    /*
     public static boolean getYNConfirm(Scanner pipe, String prompt)
     {
-        Boolean retVal = false;
+        boolean retVal = false;
         boolean done = false;
         String inputYN = "";
 
@@ -159,33 +166,33 @@ public class SafeInput {
             // favorite number 1-10
             System.out.println(prompt + ": ");
             inputYN = pipe.nextLine();
-            if (inputYN.equalsIgnoreCase("Y"))
-            {
+            if (inputYN.equalsIgnoreCase("Y")) {
                 done = true;
                 retVal = true;
             }
-            else if(inputYN.equalsIgnoreCase("N"))
-            {
-                done = true;
-                retVal = false;
+            else if (inputYN.equalsIgnoreCase("N")) {
+                retVal = true;
+                done = false;
+
+            } else // don't have a zero length string
+                {
+                    System.out.println();
+                }
             }
-            else // don't have a zero length string
-            {
-                System.out.println("You must enter Y or N");
-            }
-        } while (!done);
+        }while (!done) ;
 
         return retVal;
     }
-
-
+*/
     public static String getRegExString(Scanner pipe, String prompt, String regEx)
     {
         String retVal = "";
         boolean done = false;
 
         do {
-            // favorite number 1-10
+
+
+
             System.out.println(prompt + ": ");
             retVal = pipe.nextLine();
             if (retVal.matches(regEx))
@@ -202,6 +209,27 @@ public class SafeInput {
         return retVal;
     }
 
+    public static double CtoF(Scanner pipe, double Celcius, String prompt) {
+        double retVal = 0;
+        String trash = "";
+        boolean done = false;
+        do {
+            // favorite number 1-10
+            System.out.println(prompt + "Enter the temperature in celcius: ");
+            if (pipe.hasNextDouble()) {
+                retVal = pipe.nextDouble();
+                pipe.nextLine(); // clear the newline form the buffer
+                done = true;
+            }
+            else // don't have an double
+            {
+                trash = pipe.nextLine();
+                System.out.println("You must enter an integer not " + trash);
+            }
+        }while(!done);
+
+        return retVal;
+    }
 }
 
 

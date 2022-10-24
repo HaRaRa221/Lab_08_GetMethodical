@@ -9,5 +9,7 @@ public class FavNumbers {
         double favDouble = 0;
 
         favInt = SafeInput.getInt(in, "Enter your fav int");
+        favDouble = SafeInput.getDouble(in, "Enter your fav double");
+        System.out.println("Your favorite int and double is: " + favInt + " and " + favDouble);
     }
 }
